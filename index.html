@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuar a la Experiencia</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 1.5rem; color: #1a1a1a; }
+        p { font-size: 1rem; line-height: 1.5; color: #666; }
+        .btn {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 25px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn:active { transform: scale(0.95); }
+        .btn-wa { background-color: #25d366; }
+        .footer-note { font-size: 0.8rem; color: #999; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>¡Estás a un paso!</h1>
+    <p>Para garantizar que visualices todo nuestro contenido sin errores técnicos, haz clic en el botón de abajo.</p>
+    
+    <!-- Botón Principal: Intenta forzar navegador externo -->
+    <a href="https://jairo-cardenas-digital-card.vercel.app/" id="open-external" class="btn">ACCEDER AHORA</a>
+
+    <!-- Botón Secundario: WhatsApp -->
+    <a href="https://wa.me/04127055024?text=Hola,%20tengo%20problemas%20para%20ver%20la%20página" class="btn btn-wa">AYUDA POR WHATSAPP</a>
+
+    <p class="footer-note">Recomendado para Google Chrome o Safari</p>
+</div>
+
+<script>
+    (function() {
+        var url = "https://tu-sitio-web.com"; // Reemplaza con tu URL final
+        var btn = document.getElementById('open-external');
+
+        // Lógica para forzar apertura externa en Android/iOS
+        btn.addEventListener('click', function(e) {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Si es Android, intentamos usar el esquema de Intent de Chrome
+            if (/android/i.test(ua)) {
+                e.preventDefault();
+                var intentUrl = 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+                window.location.href = intentUrl;
+            }
+            
+            // En iOS no hay un "intent" universal, pero abrir una ventana nueva 
+            // a veces ayuda a que el sistema pregunte si desea abrir Safari.
+            // Si no detecta Android, el enlace funcionará normalmente por el href.
+        });
+
+        // Auto-redirección opcional: Si quieres que intente saltar solo al cargar
+        /*
+        window.onload = function() {
+            if (/FBAN|FBAV|Instagram/i.test(navigator.userAgent)) {
+                btn.click();
+            }
+        };
+        */
+    })();
+</script>
+
+</body>
+</html>
